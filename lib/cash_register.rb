@@ -1,41 +1,47 @@
-require 'pry'
-class CashRegister
-  attr_accessor :total, :discount, :price, :items
-
-   def initialize(discount = 0)
-    @total = 0
-    @discount = discount
+class CashRegister 
+  
+  attr_accessor :discount, :total, :employee_discount, :items, :price 
+  
+  def initialize(discount=0)
+    @total = 0 
+    @discount = discount 
+    @employee_discount = employee_discount
     @items = []
-  end
-
-   def add_item(item, price, quantity = 1)
-    @price = price
+    @transactions = 0
+    @price = price 
+  end 
+  
+  def add_item(title, price, quantity=1)
     @total += price * quantity
-    if quantity > 1
-      counter = 0
-      while counter < quantity
-        @items << item
-        counter += 1
-      end
-    else
-      @items << item
+    @transactions = price * quantity 
+    i = quantity
+    until i == 0 do
+      @items << title
+      i -= 1
     end
+    
+    #@item << title 
+  end 
+  
+  def apply_discount
+    if @discount > 0 
+      @total = (@total - @total * @discount/100.0).to_i
+      "After the discount, the total comes to $#{total}."
+    else 
+      "There is no discount to apply."
+    end 
+  end 
+  
+  def items
+    @items 
   end
-
-   def apply_discount
-    if @discount > 0
-      @to_take_off = (price * discount)/100
-      @total -= @to_take_off
-      return "After the discount, the total comes to $#{total}."
-    else
-      return "There is no discount to apply."
-    end
-  end
-
-   def void_last_transaction
-    @total -= @price
-  end
-def items
-@items 
+  
+  def void_last_transaction
+     self.total -= @transactions 
+   # else
+    # binding.pry 
+   # self.total = @total - @transactions.all
+  
+  #end 
+end 
 end
- end
