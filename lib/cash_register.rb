@@ -20,10 +20,10 @@ class CashRegister
   
   def apply_discount
     if discount 
-      @total = (@total - @total * @discount/100.0).to_i
-     "After the discount, the total comes to $#{@total}."
+      @total = (@total - @total * @discount/100.0).to_i #applying the discount based on grand total - total mulitplied by 
+     "After the discount, the total comes to $#{@total}." #give the new total after the discount 
    else
-     "There is no discount to apply."
+     "There is no discount to apply." # if no discount was applied give this statement
    end
   end
   
@@ -34,7 +34,7 @@ class CashRegister
     last_transaction[:quantity].times do # delete the quantity a set amount of times equal to the deleted items 
       @items.pop
  end
- @total # give the new updated total 
+ @total # give sthe total 
 end
  end
 
