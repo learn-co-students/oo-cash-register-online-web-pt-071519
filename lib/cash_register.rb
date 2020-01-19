@@ -14,7 +14,6 @@ class CashRegister
       @items << title 
     end
     @total += price * quantity
-    #@runninng_totals << @total
     @transaction << {quantity: quantity, 
     amount: price * quantity}
   end
@@ -30,12 +29,12 @@ class CashRegister
   
   def void_last_transaction
     #@@runninng_totals.pop
-    last_transaction = @transaction.pop
-    @total -= last_transaction[:amount]
-    last_transaction[:quantity].times do
+    last_transaction = @transaction.pop # go into the transaction array and delete the last transaction
+    @total -= last_transaction[:amount] # go into the total and give new amount from the deleted transaction
+    last_transaction[:quantity].times do # delete the quantity a set amount of times equal to the deleted items 
       @items.pop
  end
- @total
+ @total # give the new updated total 
 end
  end
 
